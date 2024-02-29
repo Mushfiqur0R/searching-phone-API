@@ -13,11 +13,19 @@
 
 <body>
     <header>
-        <h2 class="text-6xl">Hunting Phone</h2>
+        <h2 class="text-6xl container mx-auto">Hunting Phone</h2>
     </header>
-    <main>
+    <main class="container mx-auto mt-8">
+        <section class="container mx-auto bg-gray-100 p-4 m-4">
+            <input id="search-field" type="text" placeholder="search..." class="input input-bordered input-info w-full max-w-xs" />
+            <button onclick="handleSearch()" class="btn btn-active btn-accent mt-4">Search</button>
+        </section>
+
+        <!-- search result-->
+
+
         <section>
-            <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- <div class="card w-96 bg-gray-100 shadow-xl">
                     <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
