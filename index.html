@@ -21,14 +21,11 @@
             <button onclick="handleSearch()" class="btn btn-active btn-accent mt-4">Search</button>
         </section>
 
-        <!-- spinner or loader-->
-
-
         <!-- search result-->
 
 
         <section>
-            <!-- loading -->
+            <!-- loading and spinner-->
             <div id="loading-spinner" class="text-center my-40 hidden">
                 <span class="loading loading-bars loading-lg text-accent"></span>
             </div>
@@ -36,8 +33,8 @@
                 
             </div>
             <!-- show all button -->
-            <div id="show-all-container" class="hidden">
-                <button class="btn btn-active btn-accent">Show All</button>
+            <div id="show-all-container" class="hidden text-center my-8">
+                <button onclick="handleShowAll()" class="btn btn-active btn-accent">Show All</button>
 
             </div>
         </section>
