@@ -1,4 +1,4 @@
-const loadPhone = async (searchText, isShowAll) => {
+const loadPhone = async (searchText='13', isShowAll) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
@@ -23,7 +23,7 @@ const displayPhones = (phones, isShowAll) => {
     }else{
         showAllContainer.classList.add('hidden');
     }
-    console.log('is Show All ', isShowAll)
+    // console.log('is Show All ', isShowAll)
     // display only first 10 phones if not show all
     if(!isShowAll){
         phones = phones.slice(0,12);
@@ -32,7 +32,7 @@ const displayPhones = (phones, isShowAll) => {
 
 
     phones.forEach(phone => {
-        console.log(phone);
+        // console.log(phone);
 
         //2. create a div
         const phoneCard = document.createElement('div');
@@ -45,8 +45,8 @@ const displayPhones = (phones, isShowAll) => {
                     <div class="card-body">
                         <h2 class="card-title">${phone.phone_name}</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
+                        <div class="card-actions justify-center">
+                            <button onclick="handleShowDetail('${phone.slug}')" class="btn btn-outline btn-secondary">Show Details</button>
                         </div>
                     </div>
         `;
@@ -56,7 +56,39 @@ const displayPhones = (phones, isShowAll) => {
     });
     // hide loading spinner
     toggleLoadingSpinner(false);
+}
 
+// Button Onclick
+const handleShowDetail = async (id) =>{
+    // console.log('Clicked Show Details',id);
+    // load single phone data
+    const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+    const data = await res.json();
+    const phone = data.data;
+    // Load Data
+
+    showPhoneDetails(phone)
+
+}
+
+const showPhoneDetails = (phone) =>{
+    console.log(phone);
+    const phoneName =  document.getElementById('show-detail-phone-name');
+    phoneName.innerText = phone.name;
+
+    const showDetailContainer = document.getElementById('show-detail-container');
+
+    showDetailContainer.innerHTML = `
+        <img class="mt-4 mx-auto " src="${phone.image}" alt="" />
+        
+        <p class="mt-4"><span><b>Storage: </b></span>${phone?.mainFeatures?.storage}</p>
+        <p class=""><span><b>Display Size </b></span>${phone?.mainFeatures?.displaySize}</p>
+        <p class=""><span><b>ChipSet: </b></span>${phone?.mainFeatures?.chipSet}</p>
+        <p class=""><span><b>Release Date: </b></span>${phone?.releaseDate}</p>
+    `
+
+    // show the model
+    show_details_modal.showModal();
 }
 
 // handle search button
@@ -84,4 +116,4 @@ const handleShowAll = () =>{
     handleSearch(true);
 }
 
-// loadPhone();
+loadPhone();
